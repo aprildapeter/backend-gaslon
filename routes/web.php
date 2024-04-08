@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductCategoryController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,10 @@ Route::middleware('auth')->group(function () {
     //Kategori
     Route::get('/kategori/data', [ProductCategoryController::class, 'data'])->name('kategori.data');
     Route::resource('/kategori', ProductCategoryController::class);
+
+    //produk
+    Route::get('/produk/data', [ProductController::class, 'data'])->name('produk.data');
+    Route::resource('/produk', ProductController::class);
 });
 
 require __DIR__.'/auth.php';
