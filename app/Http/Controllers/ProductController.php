@@ -112,6 +112,6 @@ class ProductController extends Controller
     {
         $produk->delete();
 
-        return redirect()->route('kategori.index');
+        return redirect()->route('produk.index');
     }
 }
