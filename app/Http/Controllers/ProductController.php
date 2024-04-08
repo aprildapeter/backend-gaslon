@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
@@ -110,6 +111,13 @@ class ProductController extends Controller
      */
     public function destroy(Product $produk)
     {
+        // $merge = '/'.$produk->url;
+        // $converted_path = str_replace('/', '\\', $merge);
+        // $filePath = public_path().$converted_path;
+        // if (File::exists($filePath)) {
+        //     // Delete the file
+        //     File::delete($filePath);
+        // }
         $produk->delete();
 
         return redirect()->route('produk.index');
