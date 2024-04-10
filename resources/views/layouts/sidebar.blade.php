@@ -35,7 +35,7 @@
             {{-- Transaksi --}}
             <li class="header">TRANSAKSI</li>
             <li>
-                <a href="">
+                <a href="{{ route('transaksi.index') }}">
                     <i class="fa fa-cart-arrow-down"></i> <span>Transaksi</span>
                 </a>
             </li>

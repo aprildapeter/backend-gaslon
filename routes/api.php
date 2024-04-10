@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\ProductCategoryController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\TransactionController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('user', [UserController::class, 'updateProfile']);
     Route::post('logout', [UserController::class, 'logout']);
 
+    Route::get('transactions', [TransactionController::class, 'all']);
+    // Route::get('transactionsall', [TransactionController::class, 'alltransaction']);
+    Route::post('transactions', [TransactionController::class, 'update']);
+    Route::post('checkout', [TransactionController::class, 'checkout']);
 });
 
 Route::get('produk', [ProductController::class, 'all']);

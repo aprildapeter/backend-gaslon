@@ -1,12 +1,12 @@
 @extends('layouts.master')
 
 @section('title')
-    Produk
+    Transaksi
 @endsection
 
 @section('breadcrumb')
     @parent
-    <li class="active">Produk</li>
+    <li class="active">Transaksi</li>
 @endsection
 
 
@@ -16,21 +16,16 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="box">
-                    <div class="box-header with-border">
-                        <a href="{{ route('produk.create') }}" class="button btn btn-success btn-xs"><i
-                                class="fa fa-plus-circle"> </i> Tambah Produk
-                        </a>
-                    </div>
                     <!-- /.box-header -->
                     <div class="box-body table-responsive">
-                        <table class="table table-stiped table-bordered text-center ">
+                        <table class="table table-stiped table-bordered text-center table-tansaksi">
                             <thead>
                                 <th width="5%">No</th>
-                                <th>Nama Produk</th>
-                                <th>Nama Kategori</th>
-                                <th>Deskripsi</th>
-                                <th>Hargas</th>
-                                <th>Image</th>
+                                <th >Nama Pembeli</th>
+                                <th>Payment</th>
+                                <th>Total Harga</th>
+                                <th>Total Ongkir</th>
+                                <th>Status</th>
                                 <th width="15%"><i class="fa fa-cog"></i></th>
                             </thead>
                             <tbody></tbody>
@@ -47,19 +42,20 @@
     </section>
 @endsection
 
+@include('pages.transaksi.show')
 @push('script')
     <script>
-        let table;
+        let table, table2;
 
         $(function() {
-            table = $('.table').DataTable({
+            table = $('.table-tansaksi').DataTable({
                 processing: true,
                 paging: true,
                 autoWidth: true,
                 serverSide: true,
                 responsive: false,
                 ajax: {
-                    url: '{{ route('produk.data') }}',
+                    url: '{{ route('transaksi.data') }}',
                 },
                 columns: [{
                         data: 'DT_RowIndex',
@@ -67,19 +63,19 @@
                         sortable: false
                     },
                     {
-                        data: 'name',
+                        data: 'user.name',
                     },
                     {
-                        data: 'kategori.name',
+                        data: 'payment',
                     },
                     {
-                        data: 'description',
+                        data: 'total_price',
                     },
                     {
-                        data: 'price',
+                        data: 'shipping_price',
                     },
                     {
-                        data: 'img_url',
+                        data: 'status',
                     },
                     {
                         data: 'aksi',
@@ -88,6 +84,35 @@
                     },
                 ]
             });
+            table1 = $('.table-tansaksi-detail').DataTable({
+                processing: true,
+                bSort: false,
+                dom: 'Brt',
+                columns: [{
+                        data: 'DT_RowIndex',
+                        searchable: false,
+                        sortable: false
+                    },
+                    {
+                        data: 'user.name',
+                    },
+                    {
+                        data: 'address',
+                    },
+                    {
+                        data: 'detail_lokasi',
+                    },
+                    {
+                        data: 'produk',
+                    },
+                    {
+                        data: 'kategori',
+                    },
+                    {
+                        data: 'time_pickup_delivery',
+                    },
+                ]
+            })
             $('#modal-form').validator().on('submit', function(e) {
                 if (!e.preventDefault()) {
                     $.ajax({
@@ -108,6 +133,12 @@
             });
         });
 
+        function showDetail(url) {
+            $('#modal-detail').modal('show');
+
+            table1.ajax.url(url);
+            table1.ajax.reload();
+        }
 
         function deleteData(url) {
             if (confirm('Yakin ingin menghapus data terpilih?')) {
