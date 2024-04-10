@@ -5,6 +5,7 @@ use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,6 +49,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/transaksi', [TransactionController::class, 'index'])->name('transaksi.index');
     Route::get('/transaksi/{id}', [TransactionController::class, 'show'])->name('transaksi.show');
     Route::resource('/transaksi', TransactionController::class)->except('index', 'show');
+
+    //user
+    Route::get('/user/data', [UserController::class, 'data'])->name('user.data');
+    Route::resource('/user', UserController::class);
+
 });
 
 require __DIR__.'/auth.php';

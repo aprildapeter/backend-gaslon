@@ -4,11 +4,10 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="{{ asset(auth()->user()->profile_photo_path) }}" class="img-circle" alt="User Image">
+                <img src="{{ asset(auth()->user()->profile_photo_path ?? auth()->user()->img_url) }}" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-                <p>Alexander Pierce</p>
-                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                <p>{{ auth()->user()->name }}</p>
             </div>
         </div>
         <!-- sidebar menu: : style can be found in sidebar.less -->
@@ -51,7 +50,7 @@
             {{-- System --}}
             <li class="header">SYSTEM</li>
             <li>
-                <a href="#">
+                <a href="{{ route('user.index') }}">
                     <i class="fa fa-users"></i> <span>User</span>
                 </a>
             </li>

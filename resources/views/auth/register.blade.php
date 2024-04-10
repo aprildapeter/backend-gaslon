@@ -2,7 +2,7 @@
     <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
         @csrf
 
-        <input type="hidden" name="photo_profile" value="img/user_avatar.png">
+        <input type="hidden" name="img_url" value="img/user_avatar.png">
         <!-- Name -->
         <div>
             <x-input-label for="name" :value="__('Name')" />
