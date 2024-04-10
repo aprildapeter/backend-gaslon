@@ -47,7 +47,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/transaksi/data', [TransactionController::class, 'data'])->name('transaksi.data');
     Route::get('/transaksi', [TransactionController::class, 'index'])->name('transaksi.index');
     Route::get('/transaksi/{id}', [TransactionController::class, 'show'])->name('transaksi.show');
-    Route::get('/transaksi/edit/{id}', [TransactionController::class, 'edit'])->name('transaksi.edit');
+    Route::resource('/transaksi', TransactionController::class)->except('index', 'show');
 });
 
 require __DIR__.'/auth.php';
